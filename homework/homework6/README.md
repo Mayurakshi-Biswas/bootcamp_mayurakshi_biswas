@@ -1,21 +1,39 @@
-# Homework 6: Data Cleaning
 
 ## Cleaning Strategy
 
-1. **fill_missing_median()** — fills missing numeric values with the median of the column.
-2. **drop_missing()** — drops rows with too many missing values (threshold applied).
-3. **normalize_data()** — scales numeric columns to a 0-1 range.
+In this homework, we implemented reusable data cleaning functions and applied them to a raw dataset.
 
-## Folder Structure
+### 1. Functions
 
-- `data/raw/` — original dataset CSV
-- `data/processed/` — cleaned dataset CSV
-- `src/` — contains cleaning.py with reusable functions
-- `notebooks/` — Jupyter notebook demonstrating cleaning workflow
+- **fill_missing_median(df, columns)**  
+  Fills missing values in specified numeric columns with the median of each column.
 
-## Assumptions
+- **drop_missing(df, threshold=0.5)**  
+  Drops rows where the fraction of missing columns exceeds the threshold.
 
-- Median is used for filling numeric columns.
-- Threshold for dropping missing rows is 50% by default.
-- Only numeric columns are normalized.
+- **normalize_data(df, columns)**  
+  Normalizes numeric columns to a 0-1 range.
+
+### 2. Notebook Workflow
+
+1. Load the raw dataset from `data/raw/sample_data.csv`.
+2. Apply the cleaning functions in the following order:
+   - Fill missing values with median
+   - Drop rows with excessive missing values
+   - Normalize numeric columns
+3. Save the cleaned dataset to `data/processed/sample_data_cleaned.csv`.
+4. Compare original vs cleaned dataset in the notebook.
+
+### 3. Assumptions
+
+- Only numeric columns (`age`, `income`, `score`, `extra_data`) are normalized.
+- Missing values are handled via median imputation for numeric columns; rows with >50% missing are dropped.
+- Non-numeric columns (`zipcode`, `city`) are preserved as-is.
+
+### 4. Reproducibility
+
+- All scripts are modular under `src/cleaning.py`.
+- Notebook can be rerun independently to reproduce cleaned dataset.
+- Data directories are structured to separate raw and processed data.
+
 
